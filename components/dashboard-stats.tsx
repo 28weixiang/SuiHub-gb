@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { TrendingUp, TrendingDown, Users, Calendar, Briefcase, Award, Coins, Star, Trophy, Zap } from 'lucide-react'
+import { SmartRecommendations } from '@/components/smart-recommendations'
 
 interface WalletState {
   isConnected: boolean
@@ -198,6 +199,9 @@ export function DashboardStats({ walletState }: DashboardStatsProps) {
           </CardContent>
         </Card>
       </div>
+
+      {/* Smart Recommendations */}
+      <SmartRecommendations />
 
       {/* APU Highlights */}
       <Card className="bg-gradient-to-r from-orange-50 to-red-50 border-orange-200">

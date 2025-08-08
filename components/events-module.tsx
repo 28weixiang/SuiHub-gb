@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Badge } from '@/components/ui/badge'
 import { Calendar, MapPin, Users, Clock, Star, Award, Zap } from 'lucide-react'
+import { EventCalendar } from '@/components/event-calendar'
 
 interface Event {
   id: string
@@ -400,6 +401,9 @@ export function EventsModule() {
           </CardContent>
         </Card>
       )}
+
+      {/* Event Calendar */}
+      <EventCalendar />
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {events.map((event) => (

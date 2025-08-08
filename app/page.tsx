@@ -11,7 +11,8 @@ import { NFTBadgeModule } from '@/components/nft-badge-module'
 import { StudentProfile } from '@/components/student-profile'
 import { CampusCommunities } from '@/components/campus-communities'
 import { StudentShowcase } from '@/components/student-showcase'
-import { Calendar, Shield, Award, User, Users, Home, Sparkles, Briefcase } from 'lucide-react'
+import { IntegrationSettings } from '@/components/integration-settings'
+import { Calendar, Shield, Award, User, Users, Home, Sparkles, Briefcase, Settings } from 'lucide-react'
 
 interface WalletState {
   isConnected: boolean
@@ -38,7 +39,7 @@ export default function SuiHubPlatform() {
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs defaultValue="dashboard" className="w-full">
-          <TabsList className="grid w-full grid-cols-4 lg:grid-cols-8 mb-8 bg-white/80 backdrop-blur-sm">
+          <TabsList className="grid w-full grid-cols-4 lg:grid-cols-9 mb-8 bg-white/80 backdrop-blur-sm">
             <TabsTrigger value="dashboard" className="flex items-center gap-2">
               <Home className="h-4 w-4" />
               <span className="hidden sm:inline">Dashboard</span>
@@ -70,6 +71,10 @@ export default function SuiHubPlatform() {
             <TabsTrigger value="showcase" className="flex items-center gap-2">
               <Sparkles className="h-4 w-4" />
               <span className="hidden sm:inline">Showcase</span>
+            </TabsTrigger>
+            <TabsTrigger value="settings" className="flex items-center gap-2">
+              <Settings className="h-4 w-4" />
+              <span className="hidden sm:inline">Settings</span>
             </TabsTrigger>
           </TabsList>
 
@@ -116,6 +121,12 @@ export default function SuiHubPlatform() {
           <TabsContent value="showcase" className="space-y-6">
             <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-white/20">
               <StudentShowcase />
+            </div>
+          </TabsContent>
+
+          <TabsContent value="settings" className="space-y-6">
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+              <IntegrationSettings />
             </div>
           </TabsContent>
         </Tabs>

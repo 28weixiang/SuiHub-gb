@@ -9,6 +9,10 @@ import { Textarea } from '@/components/ui/textarea'
 import { Badge } from '@/components/ui/badge'
 import { Calendar, MapPin, Users, Coins, Clock, Star, Briefcase } from 'lucide-react'
 
+// Add these imports at the top
+import { AdvancedFilters } from '@/components/advanced-filters'
+import { ApplicationTracker } from '@/components/application-tracker'
+
 interface Gig {
   id: string
   title: string
@@ -337,6 +341,12 @@ export function GigListingModule() {
           </CardContent>
         </Card>
       )}
+
+      {/* Advanced Filters */}
+      <AdvancedFilters onFiltersChange={(filters) => console.log('Filters changed:', filters)} />
+
+      {/* Application Tracker */}
+      <ApplicationTracker />
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {gigs.map((gig) => (
