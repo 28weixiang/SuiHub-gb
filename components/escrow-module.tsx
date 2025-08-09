@@ -197,6 +197,7 @@ export function EscrowModule() {
       currentMilestone: newEscrow.useMilestones ? 0 : undefined,
     }
 
+    // Add new contract at the beginning to show at top
     setContracts([escrowContract, ...contracts])
     setNewEscrow({
       gigTitle: "",
@@ -365,182 +366,186 @@ export function EscrowModule() {
 
       {/* Contract Cards */}
       <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-2">
-        {contracts.map((contract) => (
-          <Card key={contract.id} className="hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <div className="flex justify-between items-start">
-                <div className="flex-1">
-                  <CardTitle className="text-lg">{contract.gigTitle}</CardTitle>
-                  <div className="flex items-center gap-4 mt-2 text-sm text-gray-600">
-                    <div className="flex items-center gap-2">
-                      <User className="h-4 w-4" />
-                      <span>Client: {contract.organizerName}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <User className="h-4 w-4" />
-                      <span>Worker: {contract.participantName}</span>
-                    </div>
-                  </div>
-                </div>
-                <Badge className={`${getStatusColor(contract.status)} text-white`}>
-                  <div className="flex items-center gap-1">
-                    {getStatusIcon(contract.status)}
-                    {getStatusText(contract.status)}
-                  </div>
-                </Badge>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {/* Contract Details */}
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <p className="text-gray-600">Total Amount</p>
-                  <p className="font-semibold text-green-600">{contract.amount} SUI</p>
-                </div>
-                <div>
-                  <p className="text-gray-600">Created</p>
-                  <p className="font-semibold">{new Date(contract.createdAt).toLocaleDateString()}</p>
-                </div>
-              </div>
-
-              {/* Progress Bar */}
-              {contract.milestones && (
-                <div>
-                  <div className="flex justify-between text-sm mb-2">
-                    <span>Progress</span>
-                    <span>{Math.round(getProgressPercentage(contract))}%</span>
-                  </div>
-                  <Progress value={getProgressPercentage(contract)} className="h-2" />
-                </div>
-              )}
-
-              {/* Milestones */}
-              {contract.milestones && (
-                <div>
-                  <h4 className="font-semibold mb-2">Milestones</h4>
-                  <div className="space-y-2">
-                    {contract.milestones.map((milestone, index) => (
-                      <div key={milestone.id} className="flex items-center justify-between p-2 bg-gray-50 rounded">
-                        <div className="flex-1">
-                          <p className="font-medium text-sm">{milestone.title}</p>
-                          <p className="text-xs text-gray-600">
-                            {milestone.amount} SUI • Due: {new Date(milestone.dueDate).toLocaleDateString()}
-                          </p>
-                        </div>
-                        <Badge className={getMilestoneStatusColor(milestone.status)}>{milestone.status}</Badge>
+        {contracts
+          .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+          .map((contract) => (
+            <Card key={contract.id} className="hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <div className="flex justify-between items-start">
+                  <div className="flex-1">
+                    <CardTitle className="text-lg">{contract.gigTitle}</CardTitle>
+                    <div className="flex items-center gap-4 mt-2 text-sm text-gray-600">
+                      <div className="flex items-center gap-2">
+                        <User className="h-4 w-4" />
+                        <span>Client: {contract.organizerName}</span>
                       </div>
-                    ))}
+                      <div className="flex items-center gap-2">
+                        <User className="h-4 w-4" />
+                        <span>Worker: {contract.participantName}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <Badge className={`${getStatusColor(contract.status)} text-white`}>
+                    <div className="flex items-center gap-1">
+                      {getStatusIcon(contract.status)}
+                      {getStatusText(contract.status)}
+                    </div>
+                  </Badge>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {/* Contract Details */}
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <p className="text-gray-600">Total Amount</p>
+                    <p className="font-semibold text-green-600">{contract.amount} SUI</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-600">Created</p>
+                    <p className="font-semibold">{new Date(contract.createdAt).toLocaleDateString()}</p>
                   </div>
                 </div>
-              )}
 
-              {/* Work Submission Details */}
-              {contract.workSubmittedAt && (
-                <div className="p-3 bg-orange-50 border border-orange-200 rounded">
-                  <div className="flex items-center gap-2 mb-2">
-                    <FileCheck className="h-4 w-4 text-orange-600" />
-                    <span className="font-medium text-orange-800">Work Submitted</span>
-                    <span className="text-xs text-orange-600">
-                      {new Date(contract.workSubmittedAt).toLocaleString()}
-                    </span>
+                {/* Progress Bar */}
+                {contract.milestones && (
+                  <div>
+                    <div className="flex justify-between text-sm mb-2">
+                      <span>Progress</span>
+                      <span>{Math.round(getProgressPercentage(contract))}%</span>
+                    </div>
+                    <Progress value={getProgressPercentage(contract)} className="h-2" />
                   </div>
-                  {contract.submissionNotes && <p className="text-sm text-orange-700">{contract.submissionNotes}</p>}
-                  {contract.reviewDeadline && (
-                    <p className="text-xs text-orange-600 mt-1">
-                      Review deadline: {new Date(contract.reviewDeadline).toLocaleString()}
-                    </p>
+                )}
+
+                {/* Milestones */}
+                {contract.milestones && (
+                  <div>
+                    <h4 className="font-semibold mb-2">Milestones</h4>
+                    <div className="space-y-2">
+                      {contract.milestones.map((milestone, index) => (
+                        <div key={milestone.id} className="flex items-center justify-between p-2 bg-gray-50 rounded">
+                          <div className="flex-1">
+                            <p className="font-medium text-sm">{milestone.title}</p>
+                            <p className="text-xs text-gray-600">
+                              {milestone.amount} SUI • Due: {new Date(milestone.dueDate).toLocaleDateString()}
+                            </p>
+                          </div>
+                          <Badge className={getMilestoneStatusColor(milestone.status)}>{milestone.status}</Badge>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Work Submission Details */}
+                {contract.workSubmittedAt && (
+                  <div className="p-3 bg-orange-50 border border-orange-200 rounded">
+                    <div className="flex items-center gap-2 mb-2">
+                      <FileCheck className="h-4 w-4 text-orange-600" />
+                      <span className="font-medium text-orange-800">Work Submitted</span>
+                      <span className="text-xs text-orange-600">
+                        {new Date(contract.workSubmittedAt).toLocaleString()}
+                      </span>
+                    </div>
+                    {contract.submissionNotes && <p className="text-sm text-orange-700">{contract.submissionNotes}</p>}
+                    {contract.reviewDeadline && (
+                      <p className="text-xs text-orange-600 mt-1">
+                        Review deadline: {new Date(contract.reviewDeadline).toLocaleString()}
+                      </p>
+                    )}
+                  </div>
+                )}
+
+                {/* Review Notes */}
+                {contract.reviewNotes && (
+                  <div className="p-3 bg-purple-50 border border-purple-200 rounded">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Eye className="h-4 w-4 text-purple-600" />
+                      <span className="font-medium text-purple-800">Review Notes</span>
+                    </div>
+                    <p className="text-sm text-purple-700">{contract.reviewNotes}</p>
+                  </div>
+                )}
+
+                {/* Dispute Information */}
+                {contract.status === "disputed" && contract.disputeReason && (
+                  <div className="p-3 bg-red-50 border border-red-200 rounded">
+                    <div className="flex items-center gap-2 mb-2">
+                      <AlertTriangle className="h-4 w-4 text-red-600" />
+                      <span className="font-medium text-red-800">Dispute Reason</span>
+                    </div>
+                    <p className="text-sm text-red-700">{contract.disputeReason}</p>
+                  </div>
+                )}
+
+                {/* Action Buttons */}
+                <div className="flex gap-2 pt-2">
+                  {/* For Participants (Workers) */}
+                  {isUserParticipant(contract) && (
+                    <>
+                      {contract.status === "funded" && (
+                        <Button size="sm" onClick={() => handleStatusChange(contract.id, "in_progress")}>
+                          Start Work
+                        </Button>
+                      )}
+                      {contract.status === "in_progress" && (
+                        <Button size="sm" onClick={() => setSelectedContract(contract.id)}>
+                          Submit Work
+                        </Button>
+                      )}
+                      {contract.status === "work_submitted" && (
+                        <Button size="sm" variant="outline" disabled>
+                          <Clock className="h-4 w-4 mr-1" />
+                          Awaiting Review
+                        </Button>
+                      )}
+                    </>
                   )}
-                </div>
-              )}
 
-              {/* Review Notes */}
-              {contract.reviewNotes && (
-                <div className="p-3 bg-purple-50 border border-purple-200 rounded">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Eye className="h-4 w-4 text-purple-600" />
-                    <span className="font-medium text-purple-800">Review Notes</span>
-                  </div>
-                  <p className="text-sm text-purple-700">{contract.reviewNotes}</p>
-                </div>
-              )}
-
-              {/* Dispute Information */}
-              {contract.status === "disputed" && contract.disputeReason && (
-                <div className="p-3 bg-red-50 border border-red-200 rounded">
-                  <div className="flex items-center gap-2 mb-2">
-                    <AlertTriangle className="h-4 w-4 text-red-600" />
-                    <span className="font-medium text-red-800">Dispute Reason</span>
-                  </div>
-                  <p className="text-sm text-red-700">{contract.disputeReason}</p>
-                </div>
-              )}
-
-              {/* Action Buttons */}
-              <div className="flex gap-2 pt-2">
-                {/* For Participants (Workers) */}
-                {isUserParticipant(contract) && (
-                  <>
-                    {contract.status === "funded" && (
-                      <Button size="sm" onClick={() => handleStatusChange(contract.id, "in_progress")}>
-                        Start Work
-                      </Button>
-                    )}
-                    {contract.status === "in_progress" && (
-                      <Button size="sm" onClick={() => setSelectedContract(contract.id)}>
-                        Submit Work
-                      </Button>
-                    )}
-                    {contract.status === "work_submitted" && (
-                      <Button size="sm" variant="outline" disabled>
-                        <Clock className="h-4 w-4 mr-1" />
-                        Awaiting Review
-                      </Button>
-                    )}
-                  </>
-                )}
-
-                {/* For Organizers (Clients) */}
-                {isUserOrganizer(contract) && (
-                  <>
-                    {contract.status === "pending" && (
-                      <Button size="sm" onClick={() => handleStatusChange(contract.id, "funded")}>
-                        Fund Escrow
-                      </Button>
-                    )}
-                    {(contract.status === "work_submitted" || contract.status === "under_review") && (
-                      <>
-                        <Button size="sm" onClick={() => handleStatusChange(contract.id, "completed")}>
-                          Approve & Release
+                  {/* For Organizers (Clients) */}
+                  {isUserOrganizer(contract) && (
+                    <>
+                      {contract.status === "pending" && (
+                        <Button size="sm" onClick={() => handleStatusChange(contract.id, "funded")}>
+                          Fund Escrow
                         </Button>
-                        <Button size="sm" variant="outline" onClick={() => setSelectedContract(contract.id)}>
-                          Request Changes
+                      )}
+                      {(contract.status === "work_submitted" || contract.status === "under_review") && (
+                        <>
+                          <Button size="sm" onClick={() => handleStatusChange(contract.id, "completed")}>
+                            Approve & Release
+                          </Button>
+                          <Button size="sm" variant="outline" onClick={() => setSelectedContract(contract.id)}>
+                            Request Changes
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="destructive"
+                            onClick={() =>
+                              handleStatusChange(contract.id, "disputed", "Work does not meet requirements")
+                            }
+                          >
+                            Dispute
+                          </Button>
+                        </>
+                      )}
+                      {contract.status === "completed" && (
+                        <Button size="sm" onClick={() => handleStatusChange(contract.id, "released")}>
+                          Release Funds
                         </Button>
-                        <Button
-                          size="sm"
-                          variant="destructive"
-                          onClick={() => handleStatusChange(contract.id, "disputed", "Work does not meet requirements")}
-                        >
-                          Dispute
-                        </Button>
-                      </>
-                    )}
-                    {contract.status === "completed" && (
-                      <Button size="sm" onClick={() => handleStatusChange(contract.id, "released")}>
-                        Release Funds
-                      </Button>
-                    )}
-                  </>
-                )}
+                      )}
+                    </>
+                  )}
 
-                {/* General Actions */}
-                <Button size="sm" variant="outline">
-                  <MessageSquare className="h-4 w-4 mr-1" />
-                  Chat
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+                  {/* General Actions */}
+                  <Button size="sm" variant="outline">
+                    <MessageSquare className="h-4 w-4 mr-1" />
+                    Chat
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
       </div>
 
       {/* Create Escrow Form */}
