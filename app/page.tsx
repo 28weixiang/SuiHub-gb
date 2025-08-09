@@ -1,18 +1,18 @@
-'use client'
+"use client"
 
-import { useState } from 'react'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { AppHeader } from '@/components/app-header'
-import { DashboardStats } from '@/components/dashboard-stats'
-import { GigListingModule } from '@/components/gig-listing-module'
-import { EventsModule } from '@/components/events-module'
-import { EscrowModule } from '@/components/escrow-module'
-import { NFTBadgeModule } from '@/components/nft-badge-module'
-import { StudentProfile } from '@/components/student-profile'
-import { CampusCommunities } from '@/components/campus-communities'
-import { StudentShowcase } from '@/components/student-showcase'
-import { IntegrationSettings } from '@/components/integration-settings'
-import { Calendar, Shield, Award, User, Users, Home, Sparkles, Briefcase, Settings } from 'lucide-react'
+import { useState } from "react"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { AppHeader } from "@/components/app-header"
+import { DashboardStats } from "@/components/dashboard-stats"
+import { GigListingModule } from "@/components/gig-listing-module"
+import { EventsModule } from "@/components/events-module"
+import { EscrowModule } from "@/components/escrow-module"
+import { NFTBadgeModule } from "@/components/nft-badge-module"
+import { StudentProfile } from "@/components/student-profile"
+import { CampusCommunities } from "@/components/campus-communities"
+import { StudentShowcase } from "@/components/student-showcase"
+import { IntegrationSettings } from "@/components/integration-settings"
+import { Calendar, Shield, Award, User, Users, Home, Sparkles, Briefcase, Settings } from "lucide-react"
 
 interface WalletState {
   isConnected: boolean
@@ -26,7 +26,7 @@ export default function SuiHubPlatform() {
     isConnected: false,
     address: null,
     balance: 0,
-    network: 'mainnet'
+    network: "mainnet",
   })
 
   const handleWalletChange = (newWalletState: WalletState) => {
@@ -36,7 +36,7 @@ export default function SuiHubPlatform() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       <AppHeader onWalletChange={handleWalletChange} walletState={walletState} />
-      
+
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs defaultValue="dashboard" className="w-full">
           <TabsList className="grid w-full grid-cols-4 lg:grid-cols-9 mb-8 bg-white/80 backdrop-blur-sm">
@@ -60,10 +60,12 @@ export default function SuiHubPlatform() {
               <Award className="h-4 w-4" />
               <span className="hidden sm:inline">NFT Badges</span>
             </TabsTrigger>
-            <TabsTrigger value="profile" className="flex items-center gap-2">
-              <User className="h-4 w-4" />
-              <span className="hidden sm:inline">Profile</span>
-            </TabsTrigger>
+            {walletState.isConnected && (
+              <TabsTrigger value="profile" className="flex items-center gap-2">
+                <User className="h-4 w-4" />
+                <span className="hidden sm:inline">Profile</span>
+              </TabsTrigger>
+            )}
             <TabsTrigger value="communities" className="flex items-center gap-2">
               <Users className="h-4 w-4" />
               <span className="hidden sm:inline">Communities</span>
@@ -106,11 +108,13 @@ export default function SuiHubPlatform() {
             </div>
           </TabsContent>
 
-          <TabsContent value="profile" className="space-y-6">
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <StudentProfile />
-            </div>
-          </TabsContent>
+          {walletState.isConnected && (
+            <TabsContent value="profile" className="space-y-6">
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                <StudentProfile />
+              </div>
+            </TabsContent>
+          )}
 
           <TabsContent value="communities" className="space-y-6">
             <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-white/20">
@@ -143,9 +147,7 @@ export default function SuiHubPlatform() {
                 </div>
                 <span className="font-bold text-lg">SuiHub</span>
               </div>
-              <p className="text-gray-600 text-sm">
-                Decentralized student gig platform powered by Sui blockchain
-              </p>
+              <p className="text-gray-600 text-sm">Decentralized student gig platform powered by Sui blockchain</p>
             </div>
             <div>
               <h4 className="font-semibold mb-3">Work & Learn</h4>
