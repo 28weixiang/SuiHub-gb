@@ -1,12 +1,10 @@
-'use client'
+"use client"
 
-import { useState } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Progress } from '@/components/ui/progress'
-import { User, Briefcase, Calendar, Award, Star, MapPin, Trophy, Code, Zap, Target } from 'lucide-react'
+import { useState } from "react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Briefcase, Calendar, Award, Star, Trophy, Zap, Target } from "lucide-react"
 
 interface StudentProfile {
   name: string
@@ -18,7 +16,7 @@ interface StudentProfile {
   program: string
   totalGigs: number
   totalEvents: number
-  totalHackathons: number
+  totalHackathonsWon: number
   totalEarnings: number
   reputationScore: number
   badges: NFTBadge[]
@@ -33,7 +31,7 @@ interface NFTBadge {
   name: string
   eventName: string
   imageUrl: string
-  rarity: 'common' | 'rare' | 'epic' | 'legendary'
+  rarity: "common" | "rare" | "epic" | "legendary"
   mintDate: string
 }
 
@@ -57,133 +55,165 @@ interface AttendedEvent {
 
 export function StudentProfile() {
   const [profile] = useState<StudentProfile>({
-    name: 'Mike Mentzer',
-    title: 'Hack-Master Supreme the Third',
-    university: 'Asia Pacific University of Technology & Innovation',
-    walletAddress: '0x080779...abcdef',
-    studentId: 'TP080779',
+    name: "Mike Mentzer",
+    title: "Hack-Master Supreme the Third",
+    university: "Asia Pacific University of Technology & Innovation",
+    walletAddress: "0x080779...abcdef",
+    studentId: "TP080779",
     year: 3,
-    program: 'Computer Science (Hons)',
+    program: "Computer Science (Hons)",
     totalGigs: 23,
     totalEvents: 66,
-    totalHackathons: 10,
+    totalHackathonsWon: 5,
     totalEarnings: 3450,
     reputationScore: 4.9,
-    skills: ['React.js', 'Solidity', 'Python', 'Node.js', 'Blockchain', 'Smart Contracts'],
-    achievements: ['Microsoft Certified', 'Hackathon Champion', 'Club President', 'Top Performer'],
+    skills: ["React.js", "Solidity", "Python", "Node.js", "Blockchain", "Smart Contracts"],
+    achievements: ["Microsoft Certified", "Hackathon Champion", "Club President", "Top Performer"],
     badges: [
       {
-        id: '1',
-        name: 'Hackathon Champion',
-        eventName: 'APU Blockchain Hackathon 2024',
-        imageUrl: '/web3-developer-badge-gold.png',
-        rarity: 'legendary',
-        mintDate: '2024-01-15'
+        id: "1",
+        name: "Crypto Enthusiast",
+        eventName: "APU Blockchain Hackathon 2024",
+        imageUrl:
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/b7e73f50-df9d-4b35-9e63-27e24af00106-bpPVBTATIIdM55SW9YaXepeiqZBNcy.png",
+        rarity: "legendary",
+        mintDate: "2024-01-15",
       },
       {
-        id: '2',
-        name: 'Microsoft Certified',
-        eventName: 'Microsoft Azure Workshop',
-        imageUrl: '/defi-scholar-badge-purple.png',
-        rarity: 'epic',
-        mintDate: '2024-01-20'
+        id: "2",
+        name: "Crypto Researcher",
+        eventName: "Microsoft Azure Workshop",
+        imageUrl:
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dcda4b96-19d3-4da9-b99a-1fbda96c2a62-sRSEaYPbsvlwXezw8KU50Xr3cbwQM1.png",
+        rarity: "epic",
+        mintDate: "2024-01-20",
       },
       {
-        id: '3',
-        name: 'Web3 Pioneer',
-        eventName: 'Sui Blockchain Workshop',
-        imageUrl: '/web3-developer-badge-gold.png',
-        rarity: 'rare',
-        mintDate: '2024-02-01'
+        id: "3",
+        name: "Blockchain Developer",
+        eventName: "Sui Blockchain Workshop",
+        imageUrl:
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/214287c1-6df2-49bf-84e7-8d5fa4d61fb8-YnbYofqTqY2XW9McrjZum6XFEkDI2o.png",
+        rarity: "rare",
+        mintDate: "2024-02-01",
       },
       {
-        id: '4',
-        name: 'Code Master',
-        eventName: 'Programming Competition',
-        imageUrl: '/defi-scholar-badge-purple.png',
-        rarity: 'epic',
-        mintDate: '2024-02-10'
-      }
+        id: "4",
+        name: "Eco Hero",
+        eventName: "Sustainability Hackathon",
+        imageUrl:
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/cdeb8410-9e0d-4ce9-965c-0efd6222dcca-P2aBaOrhuQaC4CZKXRHS3GIrzVmNey.png",
+        rarity: "epic",
+        mintDate: "2024-02-10",
+      },
+      {
+        id: "5",
+        name: "Eco Champion",
+        eventName: "APU Green Tech Challenge",
+        imageUrl:
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dc5e5e8b-4fe1-41b8-a514-ac851b6e773f-nRlxXuigtZa1HsQeE5G70k3LPgBdNH.png",
+        rarity: "rare",
+        mintDate: "2024-01-25",
+      },
+      {
+        id: "6",
+        name: "Eco Champion",
+        eventName: "Sustainability Innovation Contest",
+        imageUrl:
+          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fec057dc-5dcd-4719-8341-d9837a1ce166-KHnmr04oE73LMvl9gxO9gGieSPh7R9.png",
+        rarity: "rare",
+        mintDate: "2024-02-08",
+      },
     ],
     completedGigs: [
       {
-        id: '1',
-        title: 'Smart Contract Development',
+        id: "1",
+        title: "Smart Contract Development",
         payment: 800,
-        completedDate: '2024-01-10',
+        completedDate: "2024-01-10",
         rating: 5,
-        category: 'Blockchain'
+        category: "Blockchain",
       },
       {
-        id: '2',
-        title: 'React Frontend Development',
+        id: "2",
+        title: "React Frontend Development",
         payment: 650,
-        completedDate: '2024-01-05',
+        completedDate: "2024-01-05",
         rating: 5,
-        category: 'Web Development'
+        category: "Web Development",
       },
       {
-        id: '3',
-        title: 'Hackathon Mentoring',
+        id: "3",
+        title: "Hackathon Mentoring",
         payment: 400,
-        completedDate: '2023-12-20',
+        completedDate: "2023-12-20",
         rating: 5,
-        category: 'Education'
-      }
+        category: "Education",
+      },
     ],
     attendedEvents: [
       {
-        id: '1',
-        title: 'APU Blockchain Hackathon 2024',
-        date: '2024-01-15',
-        organizer: 'APU Blockchain Society',
+        id: "1",
+        title: "APU Blockchain Hackathon 2024",
+        date: "2024-01-15",
+        organizer: "APU Blockchain Society",
         badgeEarned: true,
-        type: 'Hackathon'
+        type: "Hackathon",
       },
       {
-        id: '2',
-        title: 'Microsoft Azure Workshop',
-        date: '2024-01-20',
-        organizer: 'APU Tech Club',
+        id: "2",
+        title: "Microsoft Azure Workshop",
+        date: "2024-01-20",
+        organizer: "APU Tech Club",
         badgeEarned: true,
-        type: 'Workshop'
+        type: "Workshop",
       },
       {
-        id: '3',
-        title: 'Sui Developer Meetup',
-        date: '2024-02-01',
-        organizer: 'APU Blockchain Society',
+        id: "3",
+        title: "Sui Developer Meetup",
+        date: "2024-02-01",
+        organizer: "APU Blockchain Society",
         badgeEarned: true,
-        type: 'Meetup'
+        type: "Meetup",
       },
       {
-        id: '4',
-        title: 'Programming Competition Finals',
-        date: '2024-02-10',
-        organizer: 'APU Hackathon Club',
+        id: "4",
+        title: "Programming Competition Finals",
+        date: "2024-02-10",
+        organizer: "APU Hackathon Club",
         badgeEarned: true,
-        type: 'Competition'
-      }
-    ]
+        type: "Competition",
+      },
+    ],
   })
 
   const getRarityColor = (rarity: string) => {
     switch (rarity) {
-      case 'common': return 'bg-gray-500'
-      case 'rare': return 'bg-blue-500'
-      case 'epic': return 'bg-purple-500'
-      case 'legendary': return 'bg-yellow-500'
-      default: return 'bg-gray-500'
+      case "common":
+        return "bg-gray-500"
+      case "rare":
+        return "bg-blue-500"
+      case "epic":
+        return "bg-purple-500"
+      case "legendary":
+        return "bg-yellow-500"
+      default:
+        return "bg-gray-500"
     }
   }
 
   const getRarityStars = (rarity: string) => {
     switch (rarity) {
-      case 'common': return 1
-      case 'rare': return 2
-      case 'epic': return 3
-      case 'legendary': return 4
-      default: return 1
+      case "common":
+        return 1
+      case "rare":
+        return 2
+      case "epic":
+        return 3
+      case "legendary":
+        return 4
+      default:
+        return 1
     }
   }
 
@@ -192,37 +222,14 @@ export function StudentProfile() {
       {/* Mike's Player Card */}
       <div className="space-y-6">
         {/* Player Card Display */}
-        <Card className="bg-gradient-to-r from-blue-400 to-blue-600 text-white border-0 overflow-hidden">
+        <Card className="bg-white border-0 overflow-hidden shadow-lg">
           <CardContent className="p-0">
-            <div className="relative">
-              {/* Full Player Card Image */}
-              <div className="w-full max-w-md mx-auto">
-                <img
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Untitled-2%20-%20Copy-k4xzlbMA1a79uOiM4JMiGizXRLJzk5.png"
-                  alt="Mike Mentzer Player Card"
-                  className="w-full h-auto rounded-lg"
-                />
-              </div>
-              
-              {/* Card Details Overlay */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                <div className="text-center text-white">
-                  <h1 className="text-3xl font-bold mb-2">{profile.name}</h1>
-                  <Badge className="bg-white/20 text-white mb-3 text-lg px-4 py-2">
-                    {profile.title}
-                  </Badge>
-                  <div className="grid grid-cols-2 gap-4 text-sm">
-                    <div>
-                      <p className="text-white/80">Level</p>
-                      <p className="font-semibold">Degree - Year {profile.year}</p>
-                    </div>
-                    <div>
-                      <p className="text-white/80">Student ID</p>
-                      <p className="font-semibold">{profile.studentId}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="w-full max-w-md mx-auto">
+              <img
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Untitled-2%20-%20Copy-k4xzlbMA1a79uOiM4JMiGizXRLJzk5.png"
+                alt="Mike Mentzer Player Card"
+                className="w-full h-auto rounded-lg"
+              />
             </div>
           </CardContent>
         </Card>
@@ -239,7 +246,7 @@ export function StudentProfile() {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center p-4 bg-blue-50 rounded-lg">
-                <div className="text-3xl font-bold text-blue-600 mb-2">{profile.totalHackathons}</div>
+                <div className="text-3xl font-bold text-blue-600 mb-2">{profile.totalHackathonsWon}</div>
                 <p className="text-sm text-gray-600">Hackathons Participated</p>
                 <Badge className="mt-2 bg-blue-500 text-white">Champion Level</Badge>
               </div>
@@ -249,12 +256,12 @@ export function StudentProfile() {
                 <Badge className="mt-2 bg-green-500 text-white">Most Active</Badge>
               </div>
               <div className="text-center p-4 bg-orange-50 rounded-lg">
-                <div className="text-3xl font-bold text-orange-600 mb-2">5</div>
+                <div className="text-3xl font-bold text-orange-600">5</div>
                 <p className="text-sm text-gray-600">Competition Wins</p>
                 <Badge className="mt-2 bg-orange-500 text-white">Winner</Badge>
               </div>
             </div>
-            
+
             {/* Card Achievements */}
             <div className="mt-6">
               <h4 className="font-semibold mb-3 flex items-center gap-2">
@@ -285,6 +292,15 @@ export function StudentProfile() {
                 </div>
               </div>
             </div>
+
+            {/* Update Player Card Button */}
+            <div className="mt-6 text-center">
+              <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white">
+                <Trophy className="h-4 w-4 mr-2" />
+                Update Player Card
+              </Button>
+              <p className="text-xs text-gray-500 mt-2">Refresh your card with latest achievements and stats</p>
+            </div>
           </CardContent>
         </Card>
       </div>
@@ -298,7 +314,9 @@ export function StudentProfile() {
             </div>
             <p className="text-3xl font-bold text-blue-600">{profile.totalGigs}</p>
             <p className="text-sm text-gray-600">Gigs Completed</p>
-            <Badge variant="secondary" className="mt-2">Top 5%</Badge>
+            <Badge variant="secondary" className="mt-2">
+              Top 5%
+            </Badge>
           </CardContent>
         </Card>
         <Card className="hover:shadow-lg transition-shadow">
@@ -308,7 +326,9 @@ export function StudentProfile() {
             </div>
             <p className="text-3xl font-bold text-green-600">{profile.totalEvents}</p>
             <p className="text-sm text-gray-600">Events Attended</p>
-            <Badge variant="secondary" className="mt-2">Most Active</Badge>
+            <Badge variant="secondary" className="mt-2">
+              Most Active
+            </Badge>
           </CardContent>
         </Card>
         <Card className="hover:shadow-lg transition-shadow">
@@ -316,9 +336,11 @@ export function StudentProfile() {
             <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
               <Zap className="h-6 w-6 text-orange-600" />
             </div>
-            <p className="text-3xl font-bold text-orange-600">{profile.totalHackathons}</p>
+            <p className="text-3xl font-bold text-orange-600">{profile.totalHackathonsWon}</p>
             <p className="text-sm text-gray-600">Hackathons Won</p>
-            <Badge variant="secondary" className="mt-2">Champion</Badge>
+            <Badge variant="secondary" className="mt-2">
+              Champion
+            </Badge>
           </CardContent>
         </Card>
         <Card className="hover:shadow-lg transition-shadow">
@@ -328,7 +350,9 @@ export function StudentProfile() {
             </div>
             <p className="text-3xl font-bold text-purple-600">{profile.badges.length}</p>
             <p className="text-sm text-gray-600">NFT Badges</p>
-            <Badge variant="secondary" className="mt-2">Collector</Badge>
+            <Badge variant="secondary" className="mt-2">
+              Collector
+            </Badge>
           </CardContent>
         </Card>
       </div>
@@ -392,9 +416,7 @@ export function StudentProfile() {
                     alt={badge.name}
                     className="w-24 h-24 mx-auto rounded-xl border-2 border-gray-200 group-hover:border-blue-400 transition-colors"
                   />
-                  <Badge 
-                    className={`absolute -top-2 -right-2 ${getRarityColor(badge.rarity)} text-white text-xs`}
-                  >
+                  <Badge className={`absolute -top-2 -right-2 ${getRarityColor(badge.rarity)} text-white text-xs`}>
                     {Array.from({ length: getRarityStars(badge.rarity) }).map((_, i) => (
                       <Star key={i} className="h-2 w-2 fill-current inline" />
                     ))}
@@ -421,7 +443,10 @@ export function StudentProfile() {
           </CardHeader>
           <CardContent className="space-y-4">
             {profile.completedGigs.map((gig) => (
-              <div key={gig.id} className="flex justify-between items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+              <div
+                key={gig.id}
+                className="flex justify-between items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+              >
                 <div>
                   <p className="font-semibold">{gig.title}</p>
                   <p className="text-sm text-gray-600">{gig.category}</p>
@@ -450,14 +475,19 @@ export function StudentProfile() {
           </CardHeader>
           <CardContent className="space-y-4">
             {profile.attendedEvents.map((event) => (
-              <div key={event.id} className="flex justify-between items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+              <div
+                key={event.id}
+                className="flex justify-between items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+              >
                 <div>
                   <p className="font-semibold">{event.title}</p>
                   <p className="text-sm text-gray-600">{event.organizer}</p>
                   <p className="text-xs text-gray-500">{new Date(event.date).toLocaleDateString()}</p>
                 </div>
                 <div className="text-right">
-                  <Badge variant="outline" className="mb-1">{event.type}</Badge>
+                  <Badge variant="outline" className="mb-1">
+                    {event.type}
+                  </Badge>
                   {event.badgeEarned && (
                     <div className="flex items-center gap-1">
                       <Award className="h-3 w-3 text-yellow-500" />

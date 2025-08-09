@@ -1,15 +1,14 @@
-'use client'
+"use client"
 
-import { useState } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Textarea } from '@/components/ui/textarea'
-import { Shield, Clock, CheckCircle, XCircle, Coins, User, MessageSquare, AlertTriangle, Eye, FileCheck } from 'lucide-react'
+import { useState } from "react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Badge } from "@/components/ui/badge"
+import { Progress } from "@/components/ui/progress"
+import { Textarea } from "@/components/ui/textarea"
+import { Shield, Clock, CheckCircle, Coins, User, MessageSquare, AlertTriangle, Eye, FileCheck } from "lucide-react"
 
 interface EscrowContract {
   id: string
@@ -19,7 +18,15 @@ interface EscrowContract {
   organizerName: string
   participant: string
   participantName: string
-  status: 'pending' | 'funded' | 'in_progress' | 'work_submitted' | 'under_review' | 'completed' | 'disputed' | 'released'
+  status:
+    | "pending"
+    | "funded"
+    | "in_progress"
+    | "work_submitted"
+    | "under_review"
+    | "completed"
+    | "disputed"
+    | "released"
   createdAt: string
   releaseCondition: string
   workSubmittedAt?: string
@@ -36,225 +43,312 @@ interface Milestone {
   title: string
   description: string
   amount: number
-  status: 'pending' | 'in_progress' | 'submitted' | 'approved' | 'disputed'
+  status: "pending" | "in_progress" | "submitted" | "approved" | "disputed"
   dueDate: string
 }
 
 export function EscrowModule() {
   const [contracts, setContracts] = useState<EscrowContract[]>([
     {
-      id: '1',
-      gigTitle: 'Smart Contract Development for DeFi Protocol',
+      id: "1",
+      gigTitle: "Smart Contract Development for DeFi Protocol",
       amount: 1200,
-      organizer: '0x1234...5678',
-      organizerName: 'BlockTech Solutions',
-      participant: '0x080779...abcdef', // Mike's address
-      participantName: 'Mike Mentzer',
-      status: 'work_submitted',
-      createdAt: '2024-01-10',
-      releaseCondition: 'Smart contract deployment + security audit',
-      workSubmittedAt: '2024-02-12T14:30:00Z',
-      reviewDeadline: '2024-02-15T23:59:59Z',
-      submissionNotes: 'Smart contract deployed on testnet. All tests passing. Security audit completed by CertiK. Ready for mainnet deployment.',
+      organizer: "0x1234...5678",
+      organizerName: "BlockTech Solutions",
+      participant: "0x080779...abcdef", // Mike's address
+      participantName: "Mike Mentzer",
+      status: "work_submitted",
+      createdAt: "2024-01-10",
+      releaseCondition: "Smart contract deployment + security audit",
+      workSubmittedAt: "2024-02-12T14:30:00Z",
+      reviewDeadline: "2024-02-15T23:59:59Z",
+      submissionNotes:
+        "Smart contract deployed on testnet. All tests passing. Security audit completed by CertiK. Ready for mainnet deployment.",
       milestones: [
         {
-          id: '1',
-          title: 'Contract Architecture',
-          description: 'Design and plan smart contract structure',
+          id: "1",
+          title: "Contract Architecture",
+          description: "Design and plan smart contract structure",
           amount: 300,
-          status: 'approved',
-          dueDate: '2024-01-15'
+          status: "approved",
+          dueDate: "2024-01-15",
         },
         {
-          id: '2',
-          title: 'Core Implementation',
-          description: 'Implement main contract functionality',
+          id: "2",
+          title: "Core Implementation",
+          description: "Implement main contract functionality",
           amount: 600,
-          status: 'approved',
-          dueDate: '2024-01-25'
+          status: "approved",
+          dueDate: "2024-01-25",
         },
         {
-          id: '3',
-          title: 'Testing & Deployment',
-          description: 'Complete testing and deploy to mainnet',
+          id: "3",
+          title: "Testing & Deployment",
+          description: "Complete testing and deploy to mainnet",
           amount: 300,
-          status: 'submitted',
-          dueDate: '2024-02-10'
-        }
+          status: "submitted",
+          dueDate: "2024-02-10",
+        },
       ],
-      currentMilestone: 2
+      currentMilestone: 2,
     },
     {
-      id: '2',
-      gigTitle: 'React Frontend Development',
+      id: "2",
+      gigTitle: "React Frontend Development",
       amount: 800,
-      organizer: '0x9876...5432',
-      organizerName: 'StartupXYZ',
-      participant: '0x1111...2222',
-      participantName: 'Sarah Chen',
-      status: 'in_progress',
-      createdAt: '2024-01-12',
-      releaseCondition: 'Frontend completion + responsive design',
+      organizer: "0x9876...5432",
+      organizerName: "StartupXYZ",
+      participant: "0x1111...2222",
+      participantName: "Sarah Chen",
+      status: "in_progress",
+      createdAt: "2024-01-12",
+      releaseCondition: "Frontend completion + responsive design",
       milestones: [
         {
-          id: '1',
-          title: 'UI Components',
-          description: 'Build reusable React components',
+          id: "1",
+          title: "UI Components",
+          description: "Build reusable React components",
           amount: 400,
-          status: 'in_progress',
-          dueDate: '2024-02-18'
+          status: "in_progress",
+          dueDate: "2024-02-18",
         },
         {
-          id: '2',
-          title: 'Integration & Testing',
-          description: 'API integration and testing',
+          id: "2",
+          title: "Integration & Testing",
+          description: "API integration and testing",
           amount: 400,
-          status: 'pending',
-          dueDate: '2024-02-25'
-        }
+          status: "pending",
+          dueDate: "2024-02-25",
+        },
       ],
-      currentMilestone: 0
+      currentMilestone: 0,
     },
     {
-      id: '3',
-      gigTitle: 'Python Data Analysis Dashboard',
+      id: "3",
+      gigTitle: "Python Data Analysis Dashboard",
       amount: 600,
-      organizer: '0x3333...4444',
-      organizerName: 'DataCorp Analytics',
-      participant: '0x5555...6666',
-      participantName: 'Alex Wong',
-      status: 'under_review',
-      createdAt: '2024-01-08',
-      releaseCondition: 'Data dashboard + documentation',
-      workSubmittedAt: '2024-02-11T16:45:00Z',
-      reviewDeadline: '2024-02-14T23:59:59Z',
-      submissionNotes: 'Dashboard completed with all requested features. Interactive charts, real-time data updates, and comprehensive documentation included.'
+      organizer: "0x3333...4444",
+      organizerName: "DataCorp Analytics",
+      participant: "0x5555...6666",
+      participantName: "Alex Wong",
+      status: "under_review",
+      createdAt: "2024-01-08",
+      releaseCondition: "Data dashboard + documentation",
+      workSubmittedAt: "2024-02-11T16:45:00Z",
+      reviewDeadline: "2024-02-14T23:59:59Z",
+      submissionNotes:
+        "Dashboard completed with all requested features. Interactive charts, real-time data updates, and comprehensive documentation included.",
     },
     {
-      id: '4',
-      gigTitle: 'Mobile App UI Design',
+      id: "4",
+      gigTitle: "Mobile App UI Design",
       amount: 450,
-      organizer: '0x7777...8888',
-      organizerName: 'FinanceApp Co',
-      participant: '0x9999...0000',
-      participantName: 'Lisa Kumar',
-      status: 'disputed',
-      createdAt: '2024-01-05',
-      releaseCondition: 'UI design + prototype',
-      workSubmittedAt: '2024-02-08T10:20:00Z',
-      disputeReason: 'Design does not match the agreed specifications for the onboarding flow.',
-      submissionNotes: 'Complete UI design with interactive prototype. All screens designed according to brief.',
-      reviewNotes: 'The onboarding flow needs revision. Colors and typography need adjustment per brand guidelines.'
-    }
+      organizer: "0x7777...8888",
+      organizerName: "FinanceApp Co",
+      participant: "0x9999...0000",
+      participantName: "Lisa Kumar",
+      status: "disputed",
+      createdAt: "2024-01-05",
+      releaseCondition: "UI design + prototype",
+      workSubmittedAt: "2024-02-08T10:20:00Z",
+      disputeReason: "Design does not match the agreed specifications for the onboarding flow.",
+      submissionNotes: "Complete UI design with interactive prototype. All screens designed according to brief.",
+      reviewNotes: "The onboarding flow needs revision. Colors and typography need adjustment per brand guidelines.",
+    },
   ])
 
   const [showCreateForm, setShowCreateForm] = useState(false)
   const [selectedContract, setSelectedContract] = useState<string | null>(null)
-  const [submissionNotes, setSubmissionNotes] = useState('')
-  const [reviewNotes, setReviewNotes] = useState('')
+  const [submissionNotes, setSubmissionNotes] = useState("")
+  const [reviewNotes, setReviewNotes] = useState("")
 
-  const handleStatusChange = (id: string, newStatus: EscrowContract['status'], notes?: string) => {
-    setContracts(contracts.map(contract => {
-      if (contract.id === id) {
-        const updatedContract = { ...contract, status: newStatus }
-        
-        if (newStatus === 'work_submitted') {
-          updatedContract.workSubmittedAt = new Date().toISOString()
-          updatedContract.reviewDeadline = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString() // 3 days
-          updatedContract.submissionNotes = notes
-        } else if (newStatus === 'under_review') {
-          updatedContract.reviewNotes = notes
-        } else if (newStatus === 'disputed') {
-          updatedContract.disputeReason = notes
-        }
-        
-        return updatedContract
-      }
-      return contract
-    }))
-    
-    setSelectedContract(null)
-    setSubmissionNotes('')
-    setReviewNotes('')
+  const [newEscrow, setNewEscrow] = useState({
+    gigTitle: "",
+    amount: "",
+    participant: "",
+    participantName: "",
+    releaseCondition: "",
+    useMilestones: false,
+    milestones: [{ title: "", amount: 0, dueDate: "" }],
+  })
+
+  const handleCreateEscrow = () => {
+    const escrowContract: EscrowContract = {
+      id: Date.now().toString(),
+      gigTitle: newEscrow.gigTitle,
+      amount: Number.parseFloat(newEscrow.amount),
+      organizer: "0x080779...abcdef", // Mike's address as organizer
+      organizerName: "Mike Mentzer",
+      participant: newEscrow.participant,
+      participantName: newEscrow.participantName,
+      status: "pending",
+      createdAt: new Date().toISOString().split("T")[0],
+      releaseCondition: newEscrow.releaseCondition,
+      milestones: newEscrow.useMilestones
+        ? newEscrow.milestones.map((m, index) => ({
+            id: (index + 1).toString(),
+            title: m.title,
+            description: m.title,
+            amount: m.amount,
+            status: "pending" as const,
+            dueDate: m.dueDate,
+          }))
+        : undefined,
+      currentMilestone: newEscrow.useMilestones ? 0 : undefined,
+    }
+
+    setContracts([escrowContract, ...contracts])
+    setNewEscrow({
+      gigTitle: "",
+      amount: "",
+      participant: "",
+      participantName: "",
+      releaseCondition: "",
+      useMilestones: false,
+      milestones: [{ title: "", amount: 0, dueDate: "" }],
+    })
+    setShowCreateForm(false)
   }
 
-  const handleMilestoneUpdate = (contractId: string, milestoneId: string, newStatus: Milestone['status']) => {
-    setContracts(contracts.map(contract => {
-      if (contract.id === contractId && contract.milestones) {
-        const updatedMilestones = contract.milestones.map(milestone =>
-          milestone.id === milestoneId ? { ...milestone, status: newStatus } : milestone
-        )
-        return { ...contract, milestones: updatedMilestones }
-      }
-      return contract
-    }))
+  const handleStatusChange = (id: string, newStatus: EscrowContract["status"], notes?: string) => {
+    setContracts(
+      contracts.map((contract) => {
+        if (contract.id === id) {
+          const updatedContract = { ...contract, status: newStatus }
+
+          if (newStatus === "work_submitted") {
+            updatedContract.workSubmittedAt = new Date().toISOString()
+            updatedContract.reviewDeadline = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString() // 3 days
+            updatedContract.submissionNotes = notes
+          } else if (newStatus === "under_review") {
+            updatedContract.reviewNotes = notes
+          } else if (newStatus === "disputed") {
+            updatedContract.disputeReason = notes
+          }
+
+          return updatedContract
+        }
+        return contract
+      }),
+    )
+
+    setSelectedContract(null)
+    setSubmissionNotes("")
+    setReviewNotes("")
+  }
+
+  const handleMilestoneUpdate = (contractId: string, milestoneId: string, newStatus: Milestone["status"]) => {
+    setContracts(
+      contracts.map((contract) => {
+        if (contract.id === contractId && contract.milestones) {
+          const updatedMilestones = contract.milestones.map((milestone) =>
+            milestone.id === milestoneId ? { ...milestone, status: newStatus } : milestone,
+          )
+          return { ...contract, milestones: updatedMilestones }
+        }
+        return contract
+      }),
+    )
   }
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'pending': return 'bg-yellow-500'
-      case 'funded': return 'bg-blue-500'
-      case 'in_progress': return 'bg-indigo-500'
-      case 'work_submitted': return 'bg-orange-500'
-      case 'under_review': return 'bg-purple-500'
-      case 'completed': return 'bg-green-500'
-      case 'disputed': return 'bg-red-500'
-      case 'released': return 'bg-gray-500'
-      default: return 'bg-gray-500'
+      case "pending":
+        return "bg-yellow-500"
+      case "funded":
+        return "bg-blue-500"
+      case "in_progress":
+        return "bg-indigo-500"
+      case "work_submitted":
+        return "bg-orange-500"
+      case "under_review":
+        return "bg-purple-500"
+      case "completed":
+        return "bg-green-500"
+      case "disputed":
+        return "bg-red-500"
+      case "released":
+        return "bg-gray-500"
+      default:
+        return "bg-gray-500"
     }
   }
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'pending': return <Clock className="h-4 w-4" />
-      case 'funded': return <Shield className="h-4 w-4" />
-      case 'in_progress': return <User className="h-4 w-4" />
-      case 'work_submitted': return <FileCheck className="h-4 w-4" />
-      case 'under_review': return <Eye className="h-4 w-4" />
-      case 'completed': return <CheckCircle className="h-4 w-4" />
-      case 'disputed': return <AlertTriangle className="h-4 w-4" />
-      case 'released': return <Coins className="h-4 w-4" />
-      default: return <Clock className="h-4 w-4" />
+      case "pending":
+        return <Clock className="h-4 w-4" />
+      case "funded":
+        return <Shield className="h-4 w-4" />
+      case "in_progress":
+        return <User className="h-4 w-4" />
+      case "work_submitted":
+        return <FileCheck className="h-4 w-4" />
+      case "under_review":
+        return <Eye className="h-4 w-4" />
+      case "completed":
+        return <CheckCircle className="h-4 w-4" />
+      case "disputed":
+        return <AlertTriangle className="h-4 w-4" />
+      case "released":
+        return <Coins className="h-4 w-4" />
+      default:
+        return <Clock className="h-4 w-4" />
     }
   }
 
   const getStatusText = (status: string) => {
     switch (status) {
-      case 'pending': return 'Waiting for Funding'
-      case 'funded': return 'Funded - Ready to Start'
-      case 'in_progress': return 'Work in Progress'
-      case 'work_submitted': return 'Work Submitted - Awaiting Review'
-      case 'under_review': return 'Under Review by Client'
-      case 'completed': return 'Work Approved'
-      case 'disputed': return 'Disputed - Needs Resolution'
-      case 'released': return 'Funds Released'
-      default: return status.toUpperCase()
+      case "pending":
+        return "Waiting for Funding"
+      case "funded":
+        return "Funded - Ready to Start"
+      case "in_progress":
+        return "Work in Progress"
+      case "work_submitted":
+        return "Work Submitted - Awaiting Review"
+      case "under_review":
+        return "Under Review by Client"
+      case "completed":
+        return "Work Approved"
+      case "disputed":
+        return "Disputed - Needs Resolution"
+      case "released":
+        return "Funds Released"
+      default:
+        return status.toUpperCase()
     }
   }
 
   const getMilestoneStatusColor = (status: string) => {
     switch (status) {
-      case 'pending': return 'bg-gray-200 text-gray-700'
-      case 'in_progress': return 'bg-blue-100 text-blue-700'
-      case 'submitted': return 'bg-orange-100 text-orange-700'
-      case 'approved': return 'bg-green-100 text-green-700'
-      case 'disputed': return 'bg-red-100 text-red-700'
-      default: return 'bg-gray-200 text-gray-700'
+      case "pending":
+        return "bg-gray-200 text-gray-700"
+      case "in_progress":
+        return "bg-blue-100 text-blue-700"
+      case "submitted":
+        return "bg-orange-100 text-orange-700"
+      case "approved":
+        return "bg-green-100 text-green-700"
+      case "disputed":
+        return "bg-red-100 text-red-700"
+      default:
+        return "bg-gray-200 text-gray-700"
     }
   }
 
   const getProgressPercentage = (contract: EscrowContract) => {
     if (!contract.milestones) return 0
-    const approvedMilestones = contract.milestones.filter(m => m.status === 'approved').length
+    const approvedMilestones = contract.milestones.filter((m) => m.status === "approved").length
     return (approvedMilestones / contract.milestones.length) * 100
   }
 
   const isUserParticipant = (contract: EscrowContract) => {
-    return contract.participant === '0x080779...abcdef' // Mike's address
+    return contract.participant === "0x080779...abcdef" // Mike's address
   }
 
   const isUserOrganizer = (contract: EscrowContract) => {
-    return contract.organizer === '0x080779...abcdef' // If Mike is also an organizer
+    return contract.organizer === "0x080779...abcdef" // If Mike is also an organizer
   }
 
   return (
@@ -265,7 +359,7 @@ export function EscrowModule() {
           <p className="text-gray-600">Secure payment system with milestone tracking</p>
         </div>
         <Button onClick={() => setShowCreateForm(!showCreateForm)}>
-          {showCreateForm ? 'Cancel' : 'Create Escrow'}
+          {showCreateForm ? "Cancel" : "Create Escrow"}
         </Button>
       </div>
 
@@ -329,11 +423,11 @@ export function EscrowModule() {
                       <div key={milestone.id} className="flex items-center justify-between p-2 bg-gray-50 rounded">
                         <div className="flex-1">
                           <p className="font-medium text-sm">{milestone.title}</p>
-                          <p className="text-xs text-gray-600">{milestone.amount} SUI • Due: {new Date(milestone.dueDate).toLocaleDateString()}</p>
+                          <p className="text-xs text-gray-600">
+                            {milestone.amount} SUI • Due: {new Date(milestone.dueDate).toLocaleDateString()}
+                          </p>
                         </div>
-                        <Badge className={getMilestoneStatusColor(milestone.status)}>
-                          {milestone.status}
-                        </Badge>
+                        <Badge className={getMilestoneStatusColor(milestone.status)}>{milestone.status}</Badge>
                       </div>
                     ))}
                   </div>
@@ -350,9 +444,7 @@ export function EscrowModule() {
                       {new Date(contract.workSubmittedAt).toLocaleString()}
                     </span>
                   </div>
-                  {contract.submissionNotes && (
-                    <p className="text-sm text-orange-700">{contract.submissionNotes}</p>
-                  )}
+                  {contract.submissionNotes && <p className="text-sm text-orange-700">{contract.submissionNotes}</p>}
                   {contract.reviewDeadline && (
                     <p className="text-xs text-orange-600 mt-1">
                       Review deadline: {new Date(contract.reviewDeadline).toLocaleString()}
@@ -373,7 +465,7 @@ export function EscrowModule() {
               )}
 
               {/* Dispute Information */}
-              {contract.status === 'disputed' && contract.disputeReason && (
+              {contract.status === "disputed" && contract.disputeReason && (
                 <div className="p-3 bg-red-50 border border-red-200 rounded">
                   <div className="flex items-center gap-2 mb-2">
                     <AlertTriangle className="h-4 w-4 text-red-600" />
@@ -388,23 +480,17 @@ export function EscrowModule() {
                 {/* For Participants (Workers) */}
                 {isUserParticipant(contract) && (
                   <>
-                    {contract.status === 'funded' && (
-                      <Button 
-                        size="sm" 
-                        onClick={() => handleStatusChange(contract.id, 'in_progress')}
-                      >
+                    {contract.status === "funded" && (
+                      <Button size="sm" onClick={() => handleStatusChange(contract.id, "in_progress")}>
                         Start Work
                       </Button>
                     )}
-                    {contract.status === 'in_progress' && (
-                      <Button 
-                        size="sm" 
-                        onClick={() => setSelectedContract(contract.id)}
-                      >
+                    {contract.status === "in_progress" && (
+                      <Button size="sm" onClick={() => setSelectedContract(contract.id)}>
                         Submit Work
                       </Button>
                     )}
-                    {contract.status === 'work_submitted' && (
+                    {contract.status === "work_submitted" && (
                       <Button size="sm" variant="outline" disabled>
                         <Clock className="h-4 w-4 mr-1" />
                         Awaiting Review
@@ -416,43 +502,30 @@ export function EscrowModule() {
                 {/* For Organizers (Clients) */}
                 {isUserOrganizer(contract) && (
                   <>
-                    {contract.status === 'pending' && (
-                      <Button 
-                        size="sm" 
-                        onClick={() => handleStatusChange(contract.id, 'funded')}
-                      >
+                    {contract.status === "pending" && (
+                      <Button size="sm" onClick={() => handleStatusChange(contract.id, "funded")}>
                         Fund Escrow
                       </Button>
                     )}
-                    {(contract.status === 'work_submitted' || contract.status === 'under_review') && (
+                    {(contract.status === "work_submitted" || contract.status === "under_review") && (
                       <>
-                        <Button 
-                          size="sm" 
-                          onClick={() => handleStatusChange(contract.id, 'completed')}
-                        >
+                        <Button size="sm" onClick={() => handleStatusChange(contract.id, "completed")}>
                           Approve & Release
                         </Button>
-                        <Button 
-                          size="sm" 
-                          variant="outline"
-                          onClick={() => setSelectedContract(contract.id)}
-                        >
+                        <Button size="sm" variant="outline" onClick={() => setSelectedContract(contract.id)}>
                           Request Changes
                         </Button>
-                        <Button 
-                          size="sm" 
+                        <Button
+                          size="sm"
                           variant="destructive"
-                          onClick={() => handleStatusChange(contract.id, 'disputed', 'Work does not meet requirements')}
+                          onClick={() => handleStatusChange(contract.id, "disputed", "Work does not meet requirements")}
                         >
                           Dispute
                         </Button>
                       </>
                     )}
-                    {contract.status === 'completed' && (
-                      <Button 
-                        size="sm" 
-                        onClick={() => handleStatusChange(contract.id, 'released')}
-                      >
+                    {contract.status === "completed" && (
+                      <Button size="sm" onClick={() => handleStatusChange(contract.id, "released")}>
                         Release Funds
                       </Button>
                     )}
@@ -469,6 +542,143 @@ export function EscrowModule() {
           </Card>
         ))}
       </div>
+
+      {/* Create Escrow Form */}
+      {showCreateForm && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Create New Escrow Contract</CardTitle>
+            <CardDescription>Set up secure payment escrow for a gig or project</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="gigTitle">Gig/Project Title</Label>
+                <Input
+                  id="gigTitle"
+                  value={newEscrow.gigTitle}
+                  onChange={(e) => setNewEscrow({ ...newEscrow, gigTitle: e.target.value })}
+                  placeholder="e.g., Smart Contract Development"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="amount">Escrow Amount (SUI)</Label>
+                <Input
+                  id="amount"
+                  type="number"
+                  step="0.01"
+                  value={newEscrow.amount}
+                  onChange={(e) => setNewEscrow({ ...newEscrow, amount: e.target.value })}
+                  placeholder="1000"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="participant">Worker Address</Label>
+                <Input
+                  id="participant"
+                  value={newEscrow.participant}
+                  onChange={(e) => setNewEscrow({ ...newEscrow, participant: e.target.value })}
+                  placeholder="0x1234...abcd"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="participantName">Worker Name</Label>
+                <Input
+                  id="participantName"
+                  value={newEscrow.participantName}
+                  onChange={(e) => setNewEscrow({ ...newEscrow, participantName: e.target.value })}
+                  placeholder="Worker's name"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="releaseCondition">Release Conditions</Label>
+              <Textarea
+                id="releaseCondition"
+                value={newEscrow.releaseCondition}
+                onChange={(e) => setNewEscrow({ ...newEscrow, releaseCondition: e.target.value })}
+                placeholder="Describe what needs to be completed for fund release..."
+                rows={3}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={newEscrow.useMilestones}
+                  onChange={(e) => setNewEscrow({ ...newEscrow, useMilestones: e.target.checked })}
+                />
+                Use Milestone-based Payments
+              </Label>
+            </div>
+
+            {newEscrow.useMilestones && (
+              <div className="space-y-4 p-4 bg-gray-50 rounded-lg">
+                <h4 className="font-semibold">Milestones</h4>
+                {newEscrow.milestones.map((milestone, index) => (
+                  <div key={index} className="grid grid-cols-3 gap-2">
+                    <Input
+                      placeholder="Milestone title"
+                      value={milestone.title}
+                      onChange={(e) => {
+                        const updatedMilestones = [...newEscrow.milestones]
+                        updatedMilestones[index].title = e.target.value
+                        setNewEscrow({ ...newEscrow, milestones: updatedMilestones })
+                      }}
+                    />
+                    <Input
+                      type="number"
+                      placeholder="Amount (SUI)"
+                      value={milestone.amount}
+                      onChange={(e) => {
+                        const updatedMilestones = [...newEscrow.milestones]
+                        updatedMilestones[index].amount = Number.parseFloat(e.target.value) || 0
+                        setNewEscrow({ ...newEscrow, milestones: updatedMilestones })
+                      }}
+                    />
+                    <Input
+                      type="date"
+                      value={milestone.dueDate}
+                      onChange={(e) => {
+                        const updatedMilestones = [...newEscrow.milestones]
+                        updatedMilestones[index].dueDate = e.target.value
+                        setNewEscrow({ ...newEscrow, milestones: updatedMilestones })
+                      }}
+                    />
+                  </div>
+                ))}
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() =>
+                    setNewEscrow({
+                      ...newEscrow,
+                      milestones: [...newEscrow.milestones, { title: "", amount: 0, dueDate: "" }],
+                    })
+                  }
+                >
+                  Add Milestone
+                </Button>
+              </div>
+            )}
+
+            <div className="flex gap-2 pt-4">
+              <Button onClick={handleCreateEscrow} className="flex-1">
+                Create Escrow Contract
+              </Button>
+              <Button variant="outline" onClick={() => setShowCreateForm(false)}>
+                Cancel
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Work Submission Modal */}
       {selectedContract && (
@@ -487,17 +697,17 @@ export function EscrowModule() {
                 />
               </div>
               <div className="flex gap-2">
-                <Button 
-                  onClick={() => handleStatusChange(selectedContract, 'work_submitted', submissionNotes)}
+                <Button
+                  onClick={() => handleStatusChange(selectedContract, "work_submitted", submissionNotes)}
                   disabled={!submissionNotes.trim()}
                 >
                   Submit Work
                 </Button>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   onClick={() => {
                     setSelectedContract(null)
-                    setSubmissionNotes('')
+                    setSubmissionNotes("")
                   }}
                 >
                   Cancel
