@@ -1,30 +1,49 @@
 # SuiHub
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+SuiHub is a decentralized gig marketplace built on the **Sui blockchain**.  
+It uses **Move smart contracts** for on-chain gig listings, escrow payments, and NFT achievement badges, with a **Next.js frontend** for user interaction.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/28weixiangs-projects/v0-sui-hub)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/VzlFn1Ve2RE)
+---
 
-## Overview
+## 📌 Overview
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+SuiHub allows:
+- Clubs or users to **create and list gigs** (jobs/events) on-chain.
+- Clients to **fund gigs via escrow** until milestones are completed.
+- Users to **receive NFT badges** for attending events or completing tasks.
 
-## Deployment
+This ensures **security, transparency, and proof of participation** using blockchain technology.
 
-Your project is live at:
+---
 
-**[https://vercel.com/28weixiangs-projects/v0-sui-hub](https://vercel.com/28weixiangs-projects/v0-sui-hub)**
+## ✨ Features
 
-## Build your app
+### 1. **Gig Listing**
+- Post gigs with **title, description, budget, deadline, and required skills**.
+- Stored on-chain for transparency.
+- Event emitted for real-time frontend updates.
 
-Continue building your app on:
+### 2. **Escrow Payments**
+- Secure payment system that locks funds until milestones are completed.
+- Supports **status changes**: `Pending → Funded → In Progress → Completed → Disputed`.
+- Payments only released when both parties agree.
 
-**[https://v0.dev/chat/projects/VzlFn1Ve2RE](https://v0.dev/chat/projects/VzlFn1Ve2RE)**
+### 3. **NFT Badges**
+- Clubs can mint **NFT badges** to attendees.
+- Supports rarities: **Common, Rare, Epic, Legendary**.
+- Metadata includes event details and proof of attendance.
 
-## How It Works
+---
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+## 🛠 Tech Stack
+
+- **Blockchain**: [Sui Move](https://docs.sui.io/)
+- **Smart Contracts**: Move language
+- **Frontend**: Next.js + Tailwind CSS
+- **Wallet Integration**: @mysten/sui.js
+- **Hosting**: Vercel
+
+---
+
+## 📂 Repository Structure
+
